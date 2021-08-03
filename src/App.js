@@ -1,9 +1,20 @@
+import { createTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import Divider from '@material-ui/core/Divider';
+import Header from './components/Header';
+
+let theme = createTheme();
+theme = responsiveFontSizes(theme);
+
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>App</h1>
-      </header>
+      <ThemeProvider theme={theme}>
+        <Container>
+          <Header />
+          <Divider />
+        </Container>
+      </ThemeProvider>
     </div>
   );
 }
