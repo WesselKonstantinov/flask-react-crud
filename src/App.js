@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { createTheme, makeStyles, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
+import { createTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
 import Header from './components/Header';
 import BookTable from './components/BookTable';
+import AddBookForm from './components/AddBookForm';
 import amber from '@material-ui/core/colors/amber';
 import red from '@material-ui/core/colors/red';
 
@@ -23,19 +23,6 @@ let theme = createTheme({
 });
 theme = responsiveFontSizes(theme);
 
-const useStyles = makeStyles(theme => ({
-  buttonGreen: {
-    backgroundColor: theme.palette.success.main,
-    color: '#fff',
-    marginTop: theme.spacing(4),
-    marginBottom: theme.spacing(4),
-    width: '33%',
-    '&:hover': {
-      backgroundColor: theme.palette.success.light
-    }
-  }
-}));
-
 // Mock data
 const allBooks = [
   { id: 1, title: 'boek 1', author: 'auteur 1', read: false },
@@ -46,9 +33,13 @@ const allBooks = [
 ]
 
 function App() {
-  const classes = useStyles();
-
   const [books, setBooks] = useState(allBooks);
+
+  const addBook = (title, author, read) => {
+    const newBook = { id: new Date().valueOf(), title, author, read };
+    setBooks([...books, newBook]);
+  };
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -56,7 +47,7 @@ function App() {
           <Header />
           <Divider />
           <main>
-            <Button className={classes.buttonGreen}>Add book</Button>
+            <AddBookForm addBook={addBook} />
             <BookTable books={books} />
           </main>
         </Container>
