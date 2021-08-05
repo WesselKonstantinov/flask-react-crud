@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     }
 }))
 
-function BookTable({ books }) {
+function BookTable({ books, deleteBook }) {
     const classes = useStyles();
 
     const bookRows = books.map(book =>
@@ -37,7 +37,12 @@ function BookTable({ books }) {
             <TableCell>
                 <ButtonGroup variant="contained" fullWidth>
                     <Button className={classes.buttonYellow}>Update</Button>
-                    <Button className={classes.buttonRed}>Delete</Button>
+                    <Button
+                        className={classes.buttonRed}
+                        onClick={() => deleteBook(book.id)}
+                    >
+                        Delete
+                    </Button>
                 </ButtonGroup>
             </TableCell>
         </TableRow>

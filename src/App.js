@@ -40,6 +40,11 @@ function App() {
     setBooks([...books, newBook]);
   };
 
+  const deleteBook = (id) => {
+    const remainingBooks = books.filter(book => id !== book.id);
+    setBooks(remainingBooks);
+  };
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -48,7 +53,7 @@ function App() {
           <Divider />
           <main>
             <AddBookForm addBook={addBook} />
-            <BookTable books={books} />
+            <BookTable books={books} deleteBook={deleteBook} />
           </main>
         </Container>
       </ThemeProvider>
