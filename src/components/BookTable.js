@@ -6,29 +6,10 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import ButtonGroup from '@material-ui/core/ButtonGroup';
-import Button from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import UpdateBookDialog from './UpdateBookDialog';
+import DeleteBookDialog from './DeleteBookDialog';
 
-const useStyles = makeStyles(theme => ({
-    buttonYellow: {
-        backgroundColor: theme.palette.warning.main,
-        color: theme.palette.warning.contrastText,
-        '&:hover': {
-            backgroundColor: theme.palette.warning.light
-        }
-    },
-    buttonRed: {
-        backgroundColor: theme.palette.error.main,
-        color: theme.palette.error.contrastText,
-        '&:hover': {
-            backgroundColor: theme.palette.error.light
-        }
-    }
-}))
-
-function BookTable({ books, deleteBook }) {
-    const classes = useStyles();
-
+function BookTable({ books, deleteBook, updateBook }) {
     const bookRows = books.map(book =>
         <TableRow key={book.id}>
             <TableCell>{book.title}</TableCell>
@@ -36,17 +17,12 @@ function BookTable({ books, deleteBook }) {
             <TableCell>{book.read ? 'Yes' : 'No'}</TableCell>
             <TableCell>
                 <ButtonGroup variant="contained" fullWidth>
-                    <Button className={classes.buttonYellow}>Update</Button>
-                    <Button
-                        className={classes.buttonRed}
-                        onClick={() => deleteBook(book.id)}
-                    >
-                        Delete
-                    </Button>
+                    <UpdateBookDialog updateBook={updateBook} book={book} />
+                    <DeleteBookDialog deleteBook={deleteBook} id={book.id} />
                 </ButtonGroup>
             </TableCell>
         </TableRow>
-    )
+    );
 
     return (
         <TableContainer component={Paper}>

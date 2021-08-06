@@ -45,6 +45,16 @@ function App() {
     setBooks(remainingBooks);
   };
 
+  const updateBook = (id, title, author, read) => {
+    const updatedBooks = books.map(book => {
+      if (id === book.id) {
+        return { ...book, title, author, read };
+      }
+      return book;
+    });
+    setBooks(updatedBooks);
+  };
+
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -53,7 +63,11 @@ function App() {
           <Divider />
           <main>
             <AddBookDialog addBook={addBook} />
-            <BookTable books={books} deleteBook={deleteBook} />
+            <BookTable
+              books={books}
+              deleteBook={deleteBook}
+              updateBook={updateBook}
+            />
           </main>
         </Container>
       </ThemeProvider>
