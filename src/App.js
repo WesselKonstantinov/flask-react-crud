@@ -4,7 +4,7 @@ import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import Header from './components/Header';
 import BookTable from './components/BookTable';
-import AddBookForm from './components/AddBookForm';
+import AddBookDialog from './components/AddBookDialog';
 import amber from '@material-ui/core/colors/amber';
 import red from '@material-ui/core/colors/red';
 
@@ -52,7 +52,7 @@ function App() {
           <Header />
           <Divider />
           <main>
-            <AddBookForm addBook={addBook} />
+            <AddBookDialog addBook={addBook} />
             <BookTable books={books} deleteBook={deleteBook} />
           </main>
         </Container>
