@@ -44,9 +44,9 @@ const BlueCheckbox = withStyles(theme => ({
         }
     },
     checked: {}
-}))(props => <Checkbox color="default" {...props} />)
+}))(props => <Checkbox color="default" {...props} />);
 
-function AddBookForm({ addBook }) {
+function AddBookDialog({ addBook }) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [inputValues, setInputValues] = useState({ title: '', author: '', read: false });
@@ -82,7 +82,12 @@ function AddBookForm({ addBook }) {
             >
                 Add book
             </Button>
-            <Dialog open={open} onClose={handleClose} fullWidth maxWidth="sm">
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                fullWidth
+                maxWidth="sm"
+            >
                 <DialogTitle>Add a new book</DialogTitle>
                 <DialogContent dividers>
                     <TextField
@@ -90,7 +95,6 @@ function AddBookForm({ addBook }) {
                         margin="normal"
                         fullWidth
                         type="text"
-                        id="title"
                         name="title"
                         label="Title"
                         value={inputValues.title}
@@ -101,7 +105,6 @@ function AddBookForm({ addBook }) {
                         margin="normal"
                         fullWidth
                         type="text"
-                        id="author"
                         name="author"
                         label="Author"
                         value={inputValues.author}
@@ -119,15 +122,15 @@ function AddBookForm({ addBook }) {
                 <DialogActions>
                     <ButtonGroup variant="contained" fullWidth>
                         <Button
+                            className={classes.buttonRed}
+                            onClick={handleClose}>
+                            Cancel
+                        </Button>
+                        <Button
                             className={classes.buttonBlue}
                             onClick={handleSubmit}
                         >
                             Submit
-                        </Button>
-                        <Button
-                            className={classes.buttonRed}
-                            onClick={handleClose}>
-                            Cancel
                         </Button>
                     </ButtonGroup>
                 </DialogActions>
@@ -136,4 +139,4 @@ function AddBookForm({ addBook }) {
     );
 }
 
-export default AddBookForm;
+export default AddBookDialog;
