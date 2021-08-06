@@ -98,7 +98,6 @@ function UpdateBookDialog({ book, updateBook }) {
                         margin="normal"
                         fullWidth
                         type="text"
-                        id="title"
                         name="title"
                         label="Title"
                         value={inputValues.title}
@@ -109,7 +108,6 @@ function UpdateBookDialog({ book, updateBook }) {
                         margin="normal"
                         fullWidth
                         type="text"
-                        id="author"
                         name="author"
                         label="Author"
                         value={inputValues.author}
