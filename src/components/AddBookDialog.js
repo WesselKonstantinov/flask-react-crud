@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
         '&:hover': {
             backgroundColor: theme.palette.error.light
         }
-    }
+    },
 }));
 
 const BlueCheckbox = withStyles(theme => ({
@@ -46,7 +46,7 @@ const BlueCheckbox = withStyles(theme => ({
     checked: {}
 }))(props => <Checkbox color="default" {...props} />);
 
-function AddBookDialog({ addBook }) {
+function AddBookDialog({ mutation }) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [inputValues, setInputValues] = useState({ title: '', author: '', read: false });
@@ -70,7 +70,7 @@ function AddBookDialog({ addBook }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        addBook(inputValues.title, inputValues.author, inputValues.read);
+        mutation.mutate(inputValues);
         handleClose();
     };
 
