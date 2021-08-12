@@ -3,8 +3,7 @@ import { createTheme, responsiveFontSizes, ThemeProvider } from '@material-ui/co
 import Container from '@material-ui/core/Container';
 import Divider from '@material-ui/core/Divider';
 import Header from './components/Header';
-import BookTable from './components/BookTable';
-import AddBookDialog from './components/AddBookDialog';
+import MainSection from './components/MainSection';
 import amber from '@material-ui/core/colors/amber';
 import red from '@material-ui/core/colors/red';
 
@@ -26,28 +25,6 @@ theme = responsiveFontSizes(theme);
 const queryClient = new QueryClient();
 
 function App() {
-  // const [books, setBooks] = useState(allBooks);
-
-  // const addBook = (title, author, read) => {
-  //   const newBook = { id: new Date().valueOf(), title, author, read };
-  //   setBooks([...books, newBook]);
-  // };
-
-  // const deleteBook = (id) => {
-  //   const remainingBooks = books.filter(book => id !== book.id);
-  //   setBooks(remainingBooks);
-  // };
-
-  // const updateBook = (id, title, author, read) => {
-  //   const updatedBooks = books.map(book => {
-  //     if (id === book.id) {
-  //       return { ...book, title, author, read };
-  //     }
-  //     return book;
-  //   });
-  //   setBooks(updatedBooks);
-  // };
-
   return (
     <>
       <QueryClientProvider client={queryClient}>
@@ -55,14 +32,7 @@ function App() {
           <Container>
             <Header />
             <Divider />
-            <main>
-              <AddBookDialog /*addBook={addBook}*/ />
-              <BookTable
-              // books={books}
-              // deleteBook={deleteBook}
-              // updateBook={updateBook}
-              />
-            </main>
+            <MainSection />
           </Container>
         </ThemeProvider>
       </QueryClientProvider>
