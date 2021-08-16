@@ -11,7 +11,7 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 import UpdateBookDialog from './UpdateBookDialog';
 import DeleteBookDialog from './DeleteBookDialog';
 
-function BookTable({ deleteBook, updateBook }) {
+function BookTable({ deleteBook, putMutation }) {
     const getBooks = async () => {
         const response = await fetch('http://localhost:5000/books');
         return response.json();
@@ -45,10 +45,10 @@ function BookTable({ deleteBook, updateBook }) {
                             <TableCell>{book.author}</TableCell>
                             <TableCell>{book.read ? 'Yes' : 'No'}</TableCell>
                             <TableCell>
-                                {/* <ButtonGroup variant="contained" fullWidth>
-                    <UpdateBookDialog updateBook={updateBook} book={book} />
-                    <DeleteBookDialog deleteBook={deleteBook} id={book.id} />
-                </ButtonGroup> */}
+                                <ButtonGroup variant="contained" fullWidth>
+                                    <UpdateBookDialog putMutation={putMutation} book={book} />
+                                    <DeleteBookDialog deleteBook={deleteBook} id={book.id} />
+                                </ButtonGroup>
                             </TableCell>
                         </TableRow>)}
                 </TableBody>

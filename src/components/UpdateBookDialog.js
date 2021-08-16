@@ -45,10 +45,11 @@ const BlueCheckbox = withStyles(theme => ({
     checked: {}
 }))(props => <Checkbox color="default" {...props} />);
 
-function UpdateBookDialog({ book, updateBook }) {
+function UpdateBookDialog({ book, putMutation }) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [inputValues, setInputValues] = useState({
+        id: book.id,
         title: book.title,
         author: book.author,
         read: book.read
@@ -72,7 +73,7 @@ function UpdateBookDialog({ book, updateBook }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        updateBook(book.id, inputValues.title, inputValues.author, inputValues.read);
+        putMutation.mutate(inputValues);
         handleClose();
     };
 

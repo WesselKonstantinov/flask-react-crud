@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function FeedbackAlert({ postMutation, open, handleClose }) {
+function FeedbackAlert({ postMutation, putMutation, open, handleClose }) {
     const classes = useStyles();
 
     return (
@@ -27,6 +27,20 @@ function FeedbackAlert({ postMutation, open, handleClose }) {
                     onClose={handleClose}
                 >
                     An error occurred: {postMutation.error.message}
+                </Alert>}
+                {putMutation.isSuccess && <Alert
+                    className={classes.alert}
+                    severity="success"
+                    onClose={handleClose}
+                >
+                    Book updated!
+                </Alert>}
+                {putMutation.isError && <Alert
+                    className={classes.alert}
+                    severity="error"
+                    onClose={handleClose}
+                >
+                    An error occurred: {putMutation.error.message}
                 </Alert>}
             </Collapse>
         </>
