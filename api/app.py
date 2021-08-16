@@ -43,10 +43,14 @@ class BookListResource(Resource):
         )
         db.session.add(new_book)
         db.session.commit()
-        return book_schema.dump(new_book)
+        return book_schema.dump(new_book), 201
 
 
 class BookResource(Resource):
+    def get(self, book_id):
+        book = Book.query.get_or_404(book_id)
+        return book_schema.dump(book)
+
     def put(self, book_id):
         book = Book.query.get_or_404(book_id)
 
@@ -58,7 +62,7 @@ class BookResource(Resource):
             book.read = request.json['read']
 
         db.session.commit()
-        return book_schema.dump(book)
+        return book_schema.dump(book), 201
 
     def delete(self, book_id):
         book = Book.query.get_or_404(book_id)
