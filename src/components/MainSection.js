@@ -18,7 +18,7 @@ const postBook = async (newBook) => {
 function MainSection() {
     const queryClient = useQueryClient();
     const [open, setOpen] = useState(false);
-    const mutation = useMutation(newBook => postBook(newBook), {
+    const postMutation = useMutation(newBook => postBook(newBook), {
         onSuccess: () => {
             queryClient.invalidateQueries('books');
             setOpen(true);
@@ -37,11 +37,11 @@ function MainSection() {
     return (
         <main>
             <FeedbackAlert
-                mutation={mutation}
+                postMutation={postMutation}
                 open={open}
                 handleClose={handleClose}
             />
-            <AddBookDialog mutation={mutation} />
+            <AddBookDialog postMutation={postMutation} />
             <BookTable />
         </main>
     );

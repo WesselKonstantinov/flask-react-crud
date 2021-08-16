@@ -46,7 +46,7 @@ const BlueCheckbox = withStyles(theme => ({
     checked: {}
 }))(props => <Checkbox color="default" {...props} />);
 
-function AddBookDialog({ mutation }) {
+function AddBookDialog({ postMutation }) {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
     const [inputValues, setInputValues] = useState({ title: '', author: '', read: false });
@@ -70,7 +70,7 @@ function AddBookDialog({ mutation }) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        mutation.mutate(inputValues);
+        postMutation.mutate(inputValues);
         handleClose();
     };
 
