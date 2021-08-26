@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-function DeleteBookDialog({ id, deleteBook }) {
+function DeleteBookDialog({ deleteMutation, book }) {
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
@@ -40,7 +40,7 @@ function DeleteBookDialog({ id, deleteBook }) {
     };
 
     const handleClick = () => {
-        deleteBook(id);
+        deleteMutation.mutate(book);
         handleClose();
     };
 

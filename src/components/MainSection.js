@@ -26,6 +26,12 @@ const putBook = async (editedBook) => {
     return response.json();
 };
 
+const deleteBook = async (book) => {
+    await fetch(`http://localhost:5000/books/${book.id}`, {
+        method: 'DELETE',
+    });
+};
+
 function MainSection() {
     const queryClient = useQueryClient();
     const [open, setOpen] = useState(false);
@@ -38,6 +44,14 @@ function MainSection() {
     });
 
     const putMutation = useMutation(editedBook => putBook(editedBook), {
+        onSuccess: () => {
+            queryClient.invalidateQueries('books');
+            setOpen(true);
+        },
+        onError: () => setOpen(true)
+    });
+
+    const deleteMutation = useMutation(book => deleteBook(book), {
         onSuccess: () => {
             queryClient.invalidateQueries('books');
             setOpen(true);
@@ -58,11 +72,15 @@ function MainSection() {
             <FeedbackAlert
                 postMutation={postMutation}
                 putMutation={putMutation}
+                deleteMutation={deleteMutation}
                 open={open}
                 handleClose={handleClose}
             />
             <AddBookDialog postMutation={postMutation} />
-            <BookTable putMutation={putMutation} />
+            <BookTable
+                putMutation={putMutation}
+                deleteMutation={deleteMutation}
+            />
         </main>
     );
 }
